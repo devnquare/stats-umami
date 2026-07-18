@@ -1,0 +1,22 @@
+# Dependencies (installed with composer / npm — not committed)
+/vendor/
+/node_modules/
+
+# Build output
+/stats-umami.zip
+*.zip
+
+# Local test config (generated per-machine; contains local DB creds + ABSPATH)
+/tests/wp-tests-config.php
+
+# Tool caches
+.phpunit.result.cache
+.phpunit.cache/
+.phpcs.cache
+phpstan-result.cache
+phpstan.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

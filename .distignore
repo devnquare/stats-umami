@@ -1,0 +1,52 @@
+# Dev-tree files excluded from the WordPress.org release build (see bin/build-zip.sh).
+# Zero runtime dependencies are shipped — everything here is dev/test/build tooling only.
+
+# NOTE (2026-07-12): blocks/src/, package.json and webpack.config.js are
+# DELIBERATELY shipped. blocks/build/index.js is a minified webpack bundle;
+# WordPress.org Plugin Guideline 4 requires the human-readable source (or a
+# public link to it) to accompany any compiled/obfuscated code. Shipping the
+# source + its build config lets a reviewer rebuild it. They are tiny text
+# files with zero runtime effect. (Found in the 2026-07-12 audit of the PM's
+# own work: excluding them was an unnoticed rejection risk that Plugin Check
+# cannot detect, since it is a human-review rule.)
+/tests/
+/node_modules/
+/vendor/
+/bin/
+
+composer.json
+composer.lock
+package-lock.json
+
+phpunit.xml.dist
+phpunit-integration.xml.dist
+phpcs.xml.dist
+phpstan.neon
+phpstan-bootstrap.php
+phpstan-stubs-cf7.php
+
+.phpunit.result.cache
+.phpunit.cache/
+.phpcs.cache
+phpstan-result.cache
+
+.gitignore
+.gitattributes
+.editorconfig
+.distignore
+.git/
+.github/
+
+# GitHub-facing docs — not shipped in the plugin zip (the WordPress-format
+# readme is readme.txt; LICENSE still ships). Kept in the repo, excluded here.
+README.md
+CONTRIBUTING.md
+SECURITY.md
+CHANGELOG.md
+
+*.log
+.DS_Store
+Thumbs.db
+
+# The build script's own output (never ship a stale zip-of-a-zip)
+*.zip

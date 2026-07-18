@@ -1,0 +1,456 @@
+/* ============================================================================
+   STATS UMAMI — admin UI styles (by nquare)
+   Adapted from the accepted design handoff (handoff/design/returned/assets/
+   brand-tokens.css + umami-stats-admin.css, v1.1). Enqueued ONLY on this
+   plugin's own settings screen (see Admin\SettingsPage::enqueue_assets()).
+
+   Every rule is scoped under `.umami-stats` (the .wrap gets this class) or
+   `#umami_stats_widget`, so it never leaks into other admin pages. No remote
+   assets - system font stack only; icons are inline SVG / dashicons.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   0. DESIGN TOKENS (brand-tokens.css)
+   --------------------------------------------------------------------------- */
+:root {
+  --us-teal-950: #062123;
+  --us-teal-900: #0a3236;
+  --us-teal-800: #114c52;
+  --us-teal-700: #1b6e75;
+  --us-teal-500: #2a9099;
+  --us-teal-200: #b8d8d9;
+  --us-teal-100: #dfeceb;
+  --us-teal-50:  #f1f6f5;
+
+  --us-green-700: #248156;
+  --us-green-600: #2fa66a;
+  --us-green-500: #41c97a;
+  --us-green-100: #d8f3e2;
+  --us-green-50:  #ecfaf0;
+
+  --us-paper:   #fafaf7;
+  --us-ink:     #14181a;
+  --us-ink-3:   #4b5358;
+  /* Darkened from #6e767b (measured 4.06-4.42:1 across its several
+     uses - all light-scheme WCAG AA misses) to this value (measured 4.83:1
+     against its worst-case background, --us-teal-50) - a single-token fix
+     since every use of --us-ink-4 shares this one property. */
+  --us-ink-4:   #656d72;
+  --us-rule:    #e5e3dd;
+  --us-bg-soft: #f4f2eb;
+
+  --us-ok:   #2fa66a;
+  --us-warn: #c98a2a;
+  --us-crit: #c0463b;
+  --us-info: #1b6e75;
+
+  /* A checked+disabled control (e.g. the locked
+     "Administrator" box, or any switch while the master Enable is off)
+     must read as "on, but locked", not as "off" - these are desaturated,
+     measured-contrast variants of the on-colours above, distinct from both
+     the full on-colour and the plain disabled grey. See admin.css §6 for
+     where they're used and the measured ratios. */
+  --us-teal-700-locked: #417d83;
+  --us-green-600-locked: #3c8162;
+
+  --us-r-1: 3px; --us-r-2: 6px; --us-r-3: 10px; --us-r-pill: 999px;
+  --us-shadow-card: 0 1px 2px rgba(20,24,26,.05), 0 8px 24px -12px rgba(20,24,26,.14);
+
+  --us-s-1: 4px; --us-s-2: 8px; --us-s-3: 12px; --us-s-4: 16px;
+  --us-s-5: 24px; --us-s-6: 32px; --us-s-7: 48px;
+
+  --us-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+                  Roboto, Helvetica, Arial, sans-serif;
+  --us-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas,
+                  "Liberation Mono", monospace;
+
+  --us-t-display: 22px;
+  --us-t-h2:      16px;
+  --us-t-h3:      13px;
+  --us-t-body:    13px;
+  --us-t-small:   12px;
+  --us-t-caption: 11px;
+  --us-tracking-eyebrow: 0.12em;
+}
+
+/* ---------------------------------------------------------------------------
+   1. PAGE + HEADER
+   --------------------------------------------------------------------------- */
+.umami-stats { --us-maxw: 1080px; }
+.umami-stats .wrap.umami-stats, .umami-stats .us-wrap { max-width: var(--us-maxw); }
+
+.umami-stats .us-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--us-s-4); align-items: start; }
+.umami-stats .us-row     { display: flex; align-items: center; gap: var(--us-s-3); }
+.umami-stats .us-row--between { display: flex; align-items: center; justify-content: space-between; gap: var(--us-s-3); }
+.umami-stats .us-stack   { display: flex; flex-direction: column; gap: var(--us-s-2); }
+.umami-stats .us-muted   { color: var(--us-ink-4); }
+.umami-stats .us-mono    { font-family: var(--us-font-mono); }
+
+.umami-stats .us-settings { width: 100%; border-collapse: collapse; }
+.umami-stats .us-settings th, .umami-stats .us-settings td { text-align: left; vertical-align: top; padding: 13px 0; }
+.umami-stats .us-settings th { width: 180px; font-size: var(--us-t-body); font-weight: 600; color: var(--us-teal-950); }
+.umami-stats .us-settings tr + tr { border-top: 1px solid #e9e7e1; }
+
+.umami-stats .us-perf { background: var(--us-teal-50); border: 1px solid var(--us-teal-100); border-radius: var(--us-r-2); padding: 13px 15px; margin: 16px 0; }
+.umami-stats .us-metric { display: inline-block; font-family: var(--us-font-mono); font-size: 11px; font-weight: 600; color: #155a60; background: #fff; border: 1px solid var(--us-teal-200); border-radius: 5px; padding: 3px 8px; margin: 8px 6px 0 0; }
+
+.umami-stats .is-master-off { opacity: .5; }
+.umami-stats .is-master-off label, .umami-stats .is-master-off .us-integration { cursor: not-allowed; }
+.umami-stats .us-disabled-hint { font-size: 11.5px; color: #8a5e16; display: flex; align-items: center; gap: 5px; }
+.umami-stats .us-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--us-s-4); flex-wrap: wrap;
+}
+.umami-stats .us-title-lockup { display: flex; align-items: center; gap: var(--us-s-3); }
+.umami-stats .us-mark { width: 30px; height: 30px; flex: none; }
+.umami-stats h1.us-title {
+  margin: 0; padding: 0; font-size: var(--us-t-display); font-weight: 700;
+  letter-spacing: -.02em; color: var(--us-teal-950); line-height: 1.1;
+}
+.umami-stats .us-maker { margin-top: 3px; font-size: var(--us-t-caption); color: var(--us-ink-4); }
+.umami-stats .us-maker strong { color: var(--us-teal-900); font-weight: 700; letter-spacing: -.02em; }
+
+/* ---------------------------------------------------------------------------
+   2. TABS
+   --------------------------------------------------------------------------- */
+.umami-stats .nav-tab-wrapper { margin: var(--us-s-4) 0 0; border-bottom: 1px solid #c3c4c7; }
+.umami-stats .nav-tab {
+  border-radius: var(--us-r-2) var(--us-r-2) 0 0;
+  /* This colour is OURS (WordPress core leaves .nav-tab's own color
+     unset, using its default), so the inactive-tab text at 4.34:1 against
+     core's own inactive-tab background (#dcdcde) was a genuine miss -
+     --us-teal-800 (an existing token, reused rather than adding a new one)
+     measures 7.04:1 against that same background. */
+  font-size: var(--us-t-body); color: var(--us-teal-800); font-weight: 500;
+}
+.umami-stats .nav-tab-active,
+.umami-stats .nav-tab-active:focus,
+.umami-stats .nav-tab-active:hover {
+  background: var(--us-paper); color: var(--us-teal-950); font-weight: 600;
+  border-color: #c3c4c7; border-bottom-color: var(--us-paper);
+}
+
+/* ---------------------------------------------------------------------------
+   3. PANEL / CARD
+   --------------------------------------------------------------------------- */
+.umami-stats .us-panel {
+  background: var(--us-paper); border: 1px solid var(--us-rule);
+  border-radius: var(--us-r-3); box-shadow: var(--us-shadow-card); overflow: hidden;
+  margin-top: 20px;
+}
+.umami-stats .us-panel__footer {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--us-s-3);
+  padding: var(--us-s-3) var(--us-s-5); background: var(--us-bg-soft);
+  border-top: 1px solid var(--us-rule);
+}
+.umami-stats .us-eyebrow {
+  font-size: var(--us-t-caption); letter-spacing: var(--us-tracking-eyebrow);
+  text-transform: uppercase; color: var(--us-teal-700); font-weight: 650;
+}
+.umami-stats .us-privacy {
+  font-size: var(--us-t-caption); color: var(--us-ink-4);
+  display: inline-flex; align-items: center; gap: var(--us-s-2);
+}
+
+/* ---------------------------------------------------------------------------
+   4. CONNECTION STATUS (C2)
+   --------------------------------------------------------------------------- */
+.umami-stats .us-status {
+  display: flex; align-items: center; gap: 13px; padding: var(--us-s-4) var(--us-s-5);
+  border-bottom: 1px solid var(--us-rule);
+}
+.umami-stats .us-status__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%; flex: none; color: #fff;
+}
+.umami-stats .us-status__title { font-size: 15px; font-weight: 700; }
+.umami-stats .us-status__detail { font-size: var(--us-t-small); margin-top: 1px; }
+
+.umami-stats .us-status--ok      { background: var(--us-green-50);  border-bottom-color: #cdeed8; }
+.umami-stats .us-status--ok      .us-status__icon  { background: var(--us-green-600); }
+.umami-stats .us-status--ok      .us-status__title { color: #14633a; }
+.umami-stats .us-status--ok      .us-status__detail{ color: #3d6b50; }
+
+.umami-stats .us-status--warn    { background: #fbf3e3; border-bottom-color: #f0dcb4; }
+.umami-stats .us-status--warn    .us-status__icon  { background: var(--us-warn); }
+.umami-stats .us-status--warn    .us-status__title { color: #8a5e16; }
+.umami-stats .us-status--warn    .us-status__detail{ color: #7a5a22; }
+
+.umami-stats .us-status--neutral { background: #f1f1ee; border-bottom-color: #e0ded7; }
+.umami-stats .us-status--neutral .us-status__icon  { background: #fff; border: 2px solid #9aa0a4; }
+.umami-stats .us-status--neutral .us-status__title { color: #3d4448; }
+.umami-stats .us-status--neutral .us-status__detail{ color: var(--us-ink-3); }
+
+.umami-stats .us-status--crit    { background: #fbeae8; border-bottom-color: #f0cdc8; }
+.umami-stats .us-status--crit    .us-status__icon  { background: var(--us-crit); }
+.umami-stats .us-status--crit    .us-status__title { color: #9e372e; }
+.umami-stats .us-status--crit    .us-status__detail{ color: #8a3a31; }
+
+.umami-stats .us-chip {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  padding: 5px 11px; border-radius: var(--us-r-pill);
+  font-size: var(--us-t-small); font-weight: 600; border: 1px solid;
+}
+.umami-stats .us-chip__dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.umami-stats .us-chip--ok      { background: var(--us-green-50); border-color: #a9e0bf; color: #14633a; }
+.umami-stats .us-chip--ok      .us-chip__dot { background: var(--us-green-600); animation: us-pulse 2.2s infinite; }
+.umami-stats .us-chip--warn    { background: #fbf3e3; border-color: #f0dcb4; color: #8a5e16; }
+.umami-stats .us-chip--warn    .us-chip__dot { background: var(--us-warn); }
+.umami-stats .us-chip--neutral { background: #f1f1ee; border-color: #ddd9d0; color: #3d4448; }
+.umami-stats .us-chip--neutral .us-chip__dot { background: #fff; border: 1.5px solid #9aa0a4; }
+.umami-stats .us-chip--crit    { background: #fbeae8; border-color: #f0cdc8; color: #9e372e; }
+.umami-stats .us-chip--crit    .us-chip__dot { background: var(--us-crit); }
+
+@keyframes us-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(47,166,106,.5); }
+  70%      { box-shadow: 0 0 0 5px rgba(47,166,106,0); }
+}
+
+/* ---------------------------------------------------------------------------
+   5. GUIDED STEPS
+   --------------------------------------------------------------------------- */
+.umami-stats .us-step { display: grid; grid-template-columns: 28px 1fr; gap: 14px; }
+.umami-stats .us-step__rail { display: flex; flex-direction: column; align-items: center; }
+.umami-stats .us-step__num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%; font-size: var(--us-t-body); font-weight: 700;
+  background: var(--us-teal-700); color: #fff; flex: none;
+}
+/* White text on --us-green-600 measured 3.10:1 (the one real AA
+   failure among the seven) - --us-green-700 (new, used only here) measures
+   4.83:1 against white. */
+.umami-stats .us-step__num--done { background: var(--us-green-700); }
+.umami-stats .us-step__num--todo { background: #fff; border: 2px solid #c9c7c0; color: #9aa0a4; }
+.umami-stats .us-step__line { flex: 1; width: 2px; background: var(--us-teal-100); margin: 4px 0; }
+.umami-stats .us-step__body { padding-bottom: 18px; }
+.umami-stats .us-step__label { display: block; font-size: var(--us-t-body); font-weight: 650; color: var(--us-teal-950); }
+.umami-stats .us-step__help { font-size: var(--us-t-small); color: var(--us-ink-4); margin: 2px 0 8px; }
+
+/* ---------------------------------------------------------------------------
+   6. FORM CONTROLS
+   --------------------------------------------------------------------------- */
+.umami-stats .us-input,
+.umami-stats input[type="text"].us-input,
+.umami-stats input[type="url"].us-input,
+.umami-stats select.us-input {
+  width: 100%; box-sizing: border-box; padding: 9px 12px;
+  border: 1px solid #c9c7c0; border-radius: var(--us-r-2);
+  font-size: var(--us-t-body); background: #fff; color: var(--us-ink);
+  font-family: var(--us-font-sans);
+}
+.umami-stats .us-input--mono { font-family: var(--us-font-mono); font-size: 12.5px; }
+.umami-stats .us-input--valid   { border-color: #a9e0bf; }
+.umami-stats .us-input--invalid { border-color: #d99a92; }
+.umami-stats .us-field { position: relative; }
+.umami-stats .us-field__icon { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); }
+.umami-stats .us-hint  { font-size: var(--us-t-small); color: var(--us-ink-4); margin-top: 6px; }
+.umami-stats .us-hint--ok   { color: #14633a; }
+.umami-stats .us-hint--error{ color: #9e372e; display: flex; align-items: center; gap: 5px; }
+
+.umami-stats .us-check { display: flex; align-items: flex-start; gap: 11px; cursor: pointer; }
+.umami-stats .us-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+.umami-stats .us-check__box {
+  width: 18px; height: 18px; border-radius: 4px; flex: none; margin-top: 1px;
+  background: #fff; border: 1.5px solid #b3b0a8;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+/* The checkmark glyph - checked state must never be conveyed by fill
+   colour alone (WCAG 1.4.1). Hidden by default, shown (regardless of
+   disabled) whenever the input is :checked. */
+.umami-stats .us-check__box::after {
+  content: "";
+  width: 5px; height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-top: -2px;
+  opacity: 0;
+}
+.umami-stats .us-check input:checked + .us-check__box { background: var(--us-teal-700); border-color: var(--us-teal-700); }
+.umami-stats .us-check input:checked + .us-check__box::after { opacity: 1; }
+.umami-stats .us-check input:focus-visible + .us-check__box { outline: 2px solid var(--us-teal-500); outline-offset: 2px; }
+.umami-stats .us-check input:disabled + .us-check__box { background: #f0eee9; border-color: #d5d2ca; }
+/* Checked+disabled ("on, but locked") is its OWN state, not a fallthrough
+   of :disabled - higher specificity than either single-pseudo-class rule
+   above (5 classes vs 4) wins regardless of source order. Desaturated fill
+   (--us-teal-700-locked, measured 4.68:1 against the white checkmark, 4.04:1
+   against the plain disabled-unchecked fill #f0eee9) plus the always-visible
+   checkmark glyph make "on but locked" unmistakable from "off". */
+.umami-stats .us-check input:checked:disabled + .us-check__box { background: var(--us-teal-700-locked); border-color: var(--us-teal-700-locked); }
+
+.umami-stats .us-switch { position: relative; width: 42px; height: 24px; flex: none; display: inline-block; }
+.umami-stats .us-switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.umami-stats .us-switch__track {
+  position: absolute; inset: 0; border-radius: var(--us-r-pill);
+  background: #c4c2bb; transition: background .15s ease;
+}
+.umami-stats .us-switch__knob {
+  position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: left .15s ease;
+}
+.umami-stats .us-switch input:checked ~ .us-switch__track { background: var(--us-green-600); }
+.umami-stats .us-switch input:checked ~ .us-switch__knob  { left: 21px; }
+.umami-stats .us-switch input:focus-visible ~ .us-switch__track { outline: 2px solid var(--us-teal-500); outline-offset: 2px; }
+.umami-stats .us-switch input:disabled ~ .us-switch__track { background: #d5d2ca; cursor: not-allowed; }
+.umami-stats .us-switch input:disabled { cursor: not-allowed; }
+/* Checked+disabled ("on, but locked") - see the matching .us-check rule
+   above for the full rationale. Higher specificity (5 classes vs 4) than
+   either single-pseudo-class rule wins regardless of source order.
+   Desaturated fill (--us-green-600-locked, measured 4.66:1 against the white
+   knob, 3.08:1 against the plain disabled track #d5d2ca) keeps the knob
+   sitting at the "on" (right) position plainly distinguishable from the
+   grey "off" track. */
+.umami-stats .us-switch input:checked:disabled ~ .us-switch__track { background: var(--us-green-600-locked); }
+
+/* ---------------------------------------------------------------------------
+   7. BUTTONS
+   --------------------------------------------------------------------------- */
+.umami-stats .button-primary.us-btn,
+.umami-stats .us-btn--primary {
+  background: var(--us-teal-700); border-color: #155a60; color: #fff;
+  border-radius: var(--us-r-2); font-weight: 600; box-shadow: none; text-shadow: none;
+}
+.umami-stats .button-primary.us-btn:hover,
+.umami-stats .us-btn--primary:hover { background: #155a60; border-color: #114c52; }
+.umami-stats .us-btn--secondary {
+  background: #fff; border: 1px solid var(--us-teal-200); color: var(--us-teal-700);
+  border-radius: var(--us-r-2); font-weight: 600;
+}
+.umami-stats .us-btn--danger {
+  background: #fff; border: 1px solid #e6c4bf; color: var(--us-crit);
+  border-radius: var(--us-r-2); font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+   8. PILLS / BADGES
+   --------------------------------------------------------------------------- */
+.umami-stats .us-pill {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px;
+  border-radius: var(--us-r-pill); font-size: 11.5px; font-weight: 600; border: 1px solid;
+}
+.umami-stats .us-pill--ok      { background: var(--us-green-50); border-color: #a9e0bf; color: #14633a; }
+.umami-stats .us-pill--off     { background: #f1f1ee; border-color: #ddd9d0; color: var(--us-ink-4); }
+.umami-stats .us-pill--info    { background: var(--us-teal-50); border-color: var(--us-teal-200); color: #155a60; }
+.umami-stats .us-pill--warn    { background: #fbf3e3; border-color: #f0dcb4; color: #8a5e16; }
+
+/* ---------------------------------------------------------------------------
+   9. INTEGRATION CARD
+   --------------------------------------------------------------------------- */
+.umami-stats .us-integration {
+  display: flex; align-items: center; gap: var(--us-s-3); padding: 12px;
+  border: 1px solid var(--us-rule); border-radius: var(--us-r-2); background: #fff;
+}
+.umami-stats .us-integration__logo {
+  width: 34px; height: 34px; border-radius: 7px; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12px; background: var(--us-teal-100); color: #155a60;
+}
+.umami-stats .us-integration__name { font-size: var(--us-t-body); font-weight: 650; color: var(--us-teal-950); }
+.umami-stats .us-integration__desc { font-size: 11.5px; color: var(--us-ink-4); }
+.umami-stats .us-integration.is-unavailable { background: #f6f5f0; border-color: #ebe9e3; opacity: .72; }
+.umami-stats .us-integration.is-unavailable .us-integration__logo { background: #ece9e2; color: #9aa0a4; }
+.umami-stats .us-integration.is-unavailable .us-integration__name { color: var(--us-ink-3); }
+
+/* ---------------------------------------------------------------------------
+   10. NOTICES - restyle WP's own .notice output from settings_errors()
+   --------------------------------------------------------------------------- */
+.umami-stats .notice.us-notice,
+.umami-stats .us-notice {
+  display: flex; align-items: center; gap: 10px; padding: 11px 15px;
+  border: 1px solid; border-left-width: 4px; border-radius: var(--us-r-2);
+  background: #fff; box-shadow: none;
+}
+.umami-stats .us-notice--success { background: var(--us-green-50); border-color: #a9e0bf; border-left-color: var(--us-green-600); color: #14633a; }
+.umami-stats .us-notice--warning { background: #fbf3e3; border-color: #f0dcb4; border-left-color: var(--us-warn); color: #8a5e16; }
+.umami-stats .us-notice--error   { background: #fbeae8; border-color: #f0cdc8; border-left-color: var(--us-crit); color: #9e372e; }
+.umami-stats .us-notice--info    { background: var(--us-teal-50); border-color: #cfe0df; border-left-color: var(--us-info); color: #155a60; }
+
+/* WP core's own settings_errors() markup (used directly by Admin\Notices,
+   rather than re-implementing its accessible structure) - restyle its
+   native classes with the same palette so it reads as part of the system. */
+.umami-stats div.notice.notice-success,
+.umami-stats div.notice.updated { background: var(--us-green-50); border-left-color: var(--us-green-600); }
+.umami-stats div.notice.notice-error { background: #fbeae8; border-left-color: var(--us-crit); }
+.umami-stats div.notice.notice-warning { background: #fbf3e3; border-left-color: var(--us-warn); }
+.umami-stats div.notice.notice-info { background: var(--us-teal-50); border-left-color: var(--us-info); }
+
+/* ---------------------------------------------------------------------------
+   11. CODE BLOCK
+   --------------------------------------------------------------------------- */
+.umami-stats .us-code {
+  position: relative; background: var(--us-teal-900); border-radius: var(--us-r-2);
+  padding: 13px 15px; font-family: var(--us-font-mono); font-size: 12px;
+  color: #cfe3e2; line-height: 1.7; overflow-x: auto;
+}
+.umami-stats .us-code .tok-str { color: #7fe0a6; }
+.umami-stats .us-code .tok-com { color: #7fb0b2; }
+
+/* ---------------------------------------------------------------------------
+   12. umami.is CREDIT LOCKUP
+   --------------------------------------------------------------------------- */
+.umami-stats .us-credit {
+  display: flex; align-items: flex-start; gap: var(--us-s-3);
+  padding: 16px 18px; background: var(--us-teal-50); border: 1px solid var(--us-teal-100);
+  border-radius: var(--us-r-3);
+}
+.umami-stats .us-credit__title { font-size: var(--us-t-body); font-weight: 650; color: var(--us-teal-950); }
+.umami-stats .us-credit p { margin: 4px 0 0; font-size: var(--us-t-small); line-height: 1.6; color: var(--us-ink-3); }
+.umami-stats .us-credit a { color: var(--us-teal-700); text-decoration: none; font-weight: 600; }
+.umami-stats .us-credit small { color: var(--us-ink-4); }
+
+/* ---------------------------------------------------------------------------
+   13. DASHBOARD WIDGET (#umami_stats_widget - built in a later phase)
+   --------------------------------------------------------------------------- */
+#umami_stats_widget .us-w-status {
+  display: flex; align-items: center; gap: 9px; padding: 10px 12px;
+  background: var(--us-green-50); border: 1px solid #cdeed8; border-radius: 7px; margin-bottom: 12px;
+}
+#umami_stats_widget .us-w-status.is-off      { background: #fbf3e3; border-color: #f0dcb4; }
+#umami_stats_widget .us-w-status.is-disconn  { background: #f1f1ee; border-color: #e0ded7; }
+#umami_stats_widget .us-w-meta { margin: 0 0 12px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+#umami_stats_widget .us-w-meta li { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--us-ink-3); }
+#umami_stats_widget .us-w-meta li .val { font-family: var(--us-font-mono); color: var(--us-teal-950); }
+#umami_stats_widget .us-w-links { display: flex; gap: 8px; padding-top: 11px; border-top: 1px solid var(--us-rule); }
+
+/* ---------------------------------------------------------------------------
+   14. FOCUS
+   --------------------------------------------------------------------------- */
+.umami-stats a:focus-visible,
+.umami-stats button:focus-visible,
+.umami-stats input:focus-visible,
+.umami-stats select:focus-visible,
+.umami-stats [role="switch"]:focus-visible,
+.umami-stats [tabindex]:focus-visible {
+  outline: 2px solid var(--us-teal-500); outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   15. RESPONSIVE - usable from WP's 782px mobile-admin breakpoint upward
+   --------------------------------------------------------------------------- */
+@media (max-width: 782px) {
+  .umami-stats .us-two-col { grid-template-columns: 1fr; }
+  .umami-stats .us-status { flex-wrap: wrap; }
+}
+
+/* Design-mock override (c): at very narrow widths the connect panel's
+   step label/input rows crowd - stack the guided-step grid to one column
+   below 480px (absent from the delivered CSS; see DESIGN_HANDOFF §11 4c). */
+@media (max-width: 480px) {
+  .umami-stats .us-step { grid-template-columns: 1fr; }
+  .umami-stats .us-step__rail { flex-direction: row; }
+  .umami-stats .us-step__line { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   16. REDUCED MOTION
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .umami-stats *, #umami_stats_widget * { animation: none !important; transition: none !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   17. DARK ADMIN - deliberately out of scope for 1.0: the
+   previous partial rule here restyled only the header/panel/inputs/chip and
+   never the step labels/help text/footer text/switch labels, so a dark OS
+   left large parts of the screen unreadable. Ship light-only for now.
+   --------------------------------------------------------------------------- */

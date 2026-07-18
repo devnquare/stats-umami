@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Stats Umami website
+    url: https://umamiwp.com
+    about: Product info, download, and documentation.
+  - name: Security report (private)
+    url: https://github.com/devnquare/stats-umami/security/policy
+    about: Please report vulnerabilities privately — do not open a public issue.
+  - name: About Umami
+    url: https://umami.is
+    about: Stats Umami connects to Umami; for Umami itself, see the Umami project.

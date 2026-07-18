@@ -1,0 +1,573 @@
+# Copyright (C) 2026 nquare
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats Umami 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stats-umami\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-17T19:01:45+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: stats-umami\n"
+
+#. Plugin Name of the plugin
+#: stats-umami.php
+#: src/Admin/DashboardWidget.php:69
+#: src/Admin/SettingsPage.php:66
+#: src/Admin/SettingsPage.php:67
+#: src/Admin/SettingsPage.php:358
+msgid "Stats Umami"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: stats-umami.php
+msgid "https://umamiwp.com"
+msgstr ""
+
+#. Description of the plugin
+#: stats-umami.php
+msgid "Connect WordPress to your self-hosted Umami v3.x for cookie-free, privacy-friendly analytics with events for forms, blocks, and WooCommerce."
+msgstr ""
+
+#. Author of the plugin
+#: stats-umami.php
+msgid "nquare"
+msgstr ""
+
+#. Author URI of the plugin
+#: stats-umami.php
+msgid "https://nquare.pt"
+msgstr ""
+
+#: src/Admin/DashboardWidget.php:103
+msgid "Administrators are excluded by default - to check it, browse logged out or in a private/incognito window."
+msgstr ""
+
+#: src/Admin/DashboardWidget.php:108
+msgid "Host"
+msgstr ""
+
+#: src/Admin/DashboardWidget.php:112
+msgid "Website ID"
+msgstr ""
+
+#: src/Admin/DashboardWidget.php:119
+msgid "Open settings"
+msgstr ""
+
+#: src/Admin/DashboardWidget.php:123
+#: src/Admin/SettingsPage.php:483
+msgid "View your stats"
+msgstr ""
+
+#: src/Admin/DashboardWidget.php:207
+#: src/Admin/DashboardWidget.php:223
+msgid "Not set"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:156
+msgid "Website ID looks invalid - that change was not saved. Check the ID format: it should be a UUID from your Umami dashboard."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:177
+#: src/Admin/SetupNotice.php:139
+msgid "You are not allowed to do that."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:194
+msgid "All settings have been reset to their defaults."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:229
+#: src/Admin/SettingsPage.php:530
+msgid "Valid Website ID."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:230
+msgid "Website ID looks invalid - expected a UUID."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:231
+msgid "Reset every Stats Umami setting to its default value? This cannot be undone."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:232
+#: src/Admin/SettingsPage.php:964
+msgid "On"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:233
+#: src/Admin/SettingsPage.php:964
+msgid "Off"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:248
+msgid "Settings"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:263
+msgid "General"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:264
+msgid "Events & integrations"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:265
+msgid "Advanced"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:266
+msgid "Tools & Support"
+msgstr ""
+
+#. translators: %s: maker name, "nquare".
+#: src/Admin/SettingsPage.php:363
+#, php-format
+msgid "by %s"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:387
+msgid "Stats Umami settings"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:432
+msgid "Connected & tracking"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:433
+msgid "Configured - tracking is off"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:434
+msgid "Not connected yet"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:435
+msgid "Website ID looks invalid"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:463
+msgid "Your site is sending page views to your own Umami server. Administrators are excluded by default - to check it, open your site logged out or in a private/incognito window."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:464
+msgid "Your details are saved. Turn on tracking to go live."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:465
+msgid "Add your Umami host and Website ID below to begin."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:466
+msgid "Check the ID format - it should be a UUID from your Umami dashboard."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:495
+msgid "Add your Umami host"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:496
+msgid "The web address where your Umami runs. If Umami is installed in a subfolder, or the tracker script has been renamed, enter the full script URL instead (e.g. https://example.com/analytics/script.js)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:514
+msgid "Paste your Website ID"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:515
+msgid "The Website ID from your Umami dashboard (a UUID)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:528
+msgid "Website ID looks invalid - that change was not saved. The value shown is your last valid one."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:542
+msgid "Turn on tracking"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:543
+msgid "Saves and starts recording on your site."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:550
+msgid "Your data stays on your own Umami server."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:551
+#: src/Admin/SettingsPage.php:601
+#: src/Admin/SettingsPage.php:681
+#: src/Admin/SettingsPage.php:777
+#: src/Admin/SettingsPage.php:804
+msgid "Save changes"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:558
+msgid "Performance tracking"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:559
+msgid "Record Core Web Vitals alongside page views."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:574
+msgid "Share URL"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:585
+msgid "Optional. Your Umami dashboard's public share link. When set, a \"View your stats\" link appears here and on your dashboard widget. Anyone with this link can view the shared dashboard."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:589
+msgid "Dashboard widget"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:593
+msgid "Dashboard widget visible to"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:596
+msgid "Which roles can see the Stats Umami widget on the WordPress dashboard. Administrators can always see it."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:615
+msgid "Link clicks"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:615
+msgid "Record clicks on links on your site."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:616
+msgid "Outbound links"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:616
+msgid "Record clicks on links that leave your site."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:617
+msgid "Button clicks"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:617
+msgid "Record clicks on buttons."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:618
+msgid "Form submissions"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:618
+msgid "Record native form submissions. Contact Form 7 and WPForms are handled by their integrations below."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:619
+msgid "Comment submissions"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:619
+msgid "Record when a visitor posts a comment."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:624
+msgid "Gutenberg"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:625
+msgid "Track block button/link clicks as events."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:629
+msgid "Contact Form 7"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:630
+#: src/Admin/SettingsPage.php:635
+msgid "Track successful form submissions as events."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:634
+msgid "WPForms"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:639
+msgid "WooCommerce"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:640
+msgid "Track paid orders (Processing or Completed), with revenue."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:644
+msgid "Elementor"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:645
+msgid "Track Elementor button clicks as events."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:656
+msgid "Turn on tracking in the General tab to activate these options."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:661
+msgid "Automatic tracking"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:668
+#: src/Admin/SettingsPage.php:1003
+msgid "Turn on tracking in General to enable."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:673
+msgid "Plugin integrations"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:694
+msgid "Automatic page views"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:695
+msgid "Record a page view automatically on each page load. Turn this off only if your theme or app sends page views itself."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:697
+msgid "Exclude search parameters from URLs"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:698
+msgid "Exclude hash (#) from URLs"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:699
+msgid "Respect \"Do Not Track\" browser setting"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:708
+msgid "Exclude roles"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:711
+msgid "Logged-in users with any of the ticked roles are never tracked - regardless of what they click or visit. This is why your own visits as an administrator do not show up in Umami."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:715
+msgid "Script loading"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:718
+msgid "defer (recommended)"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:719
+msgid "async"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:724
+msgid "Host URL override"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:734
+msgid "Only needed when the tracker script loads from one address but should send its data to a different one (e.g. a CDN or a nested custom path)."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:738
+msgid "Allowed domains"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:748
+msgid "Limit tracking to these hostnames (comma-separated). Leave blank to allow any. Useful when a staging copy shares the same Website ID - list only the hostnames you want counted."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:752
+msgid "Global tag"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:762
+msgid "Label every event Umami records from this site with this tag - including page views and, if enabled below, performance events - so you can filter by it in Umami."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:766
+msgid "Tracking behavior"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:796
+msgid "Delete data on uninstall"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:799
+msgid "Deletes only this plugin's own settings when you uninstall it. Your analytics stored in Umami are never touched."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:810
+msgid "Resets all Stats Umami settings to their defaults. Your Umami connection details will be cleared."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:811
+msgid "Reset to defaults"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:815
+msgid "Developer API"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:816
+msgid "Fire a custom event from your own JavaScript:"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:818
+msgid "Available on the front end to non-excluded visitors - test while logged out. Call it after the page has loaded or on a user interaction; events fired before the Umami tracker is ready are not queued. Event data is sent to Umami and is subject to Umami's own limits."
+msgstr ""
+
+#: src/Admin/SettingsPage.php:822
+msgid "Support & resources"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:824
+msgid "Plugin website"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:825
+msgid "Support forum"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:826
+msgid "Rate Stats Umami"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:832
+msgid "Built by nquare"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:835
+msgid "With thanks to the Umami project. Built on the open-source Umami project (umami.is), with gratitude. Not affiliated with or endorsed by Umami."
+msgstr ""
+
+#. translators: %s: plugin version.
+#: src/Admin/SettingsPage.php:841
+#, php-format
+msgid "Version: %s"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:992
+msgid "Detected"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:992
+msgid "Not installed"
+msgstr ""
+
+#. translators: %s: integration name, e.g. "WPForms".
+#: src/Admin/SettingsPage.php:1000
+#, php-format
+msgid "Install %s to enable this."
+msgstr ""
+
+#: src/Admin/SetupNotice.php:124
+msgid "Stats Umami is installed. Connect it to your Umami server to start tracking."
+msgstr ""
+
+#: src/Admin/SetupNotice.php:125
+msgid "Set up Stats Umami"
+msgstr ""
+
+#: src/Admin/SetupNotice.php:126
+msgid "Dismiss"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:64
+#: src/Integrations/WPForms.php:340
+#: src/Integrations/WPForms.php:366
+msgid "Umami"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:87
+msgid "Umami event tracking"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:89
+msgid "Fire a custom Umami event when this form is submitted successfully. Leave the event name blank to use the form title instead."
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:93
+#: blocks/build/index.js:1
+#: blocks/src/index.js:136
+msgid "Event name"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:107
+#: src/Integrations/WPForms.php:381
+msgid "Event data"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:108
+#: src/Integrations/WPForms.php:382
+msgid "Optional extra details sent with the event, as key/value pairs - for example: source = contact_page."
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:113
+#: src/Integrations/ContactForm7.php:371
+#: src/Integrations/WPForms.php:387
+#: src/Integrations/WPForms.php:667
+msgid "key"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:114
+#: src/Integrations/ContactForm7.php:372
+#: src/Integrations/WPForms.php:388
+#: src/Integrations/WPForms.php:668
+msgid "value"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:115
+#: src/Integrations/ContactForm7.php:370
+#: src/Integrations/WPForms.php:389
+#: src/Integrations/WPForms.php:666
+#: blocks/build/index.js:1
+#: blocks/src/index.js:113
+msgid "Remove"
+msgstr ""
+
+#: src/Integrations/ContactForm7.php:120
+#: src/Integrations/WPForms.php:394
+msgid "Add data pair"
+msgstr ""
+
+#: src/Integrations/WPForms.php:369
+msgid "Umami event name"
+msgstr ""
+
+#: src/Integrations/WPForms.php:377
+msgid "Leave blank to use this form's own name as the event name."
+msgstr ""
+
+#: blocks/build/index.js:1
+#: blocks/src/index.js:97
+msgid "Key"
+msgstr ""
+
+#: blocks/build/index.js:1
+#: blocks/src/index.js:104
+msgid "Value"
+msgstr ""
+
+#: blocks/build/index.js:1
+#: blocks/src/index.js:120
+msgid "Add data"
+msgstr ""
+
+#: blocks/build/index.js:1
+#: blocks/src/index.js:134
+msgid "Umami Tracking"
+msgstr ""
+
+#: blocks/build/index.js:1
+#: blocks/src/index.js:137
+msgid "Fires a custom Umami event when this button is clicked."
+msgstr ""

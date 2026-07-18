@@ -1,0 +1,38 @@
+{
+    "name": "nquare/stats-umami",
+    "description": "Connect WordPress to your self-hosted Umami v3.x for cookie-free, privacy-friendly analytics with events for forms, blocks, and WooCommerce.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "php-stubs/woocommerce-stubs": "^10.9",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpstan/phpstan": "^2.1",
+        "squizlabs/php_codesniffer": "^3.13",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "wp-coding-standards/wpcs": "^3.3",
+        "wp-phpunit/wp-phpunit": "^7.0",
+        "yoast/wp-test-utils": "^1.2"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "lint": "phpcs",
+        "lint-fix": "phpcbf",
+        "compat": "phpcs --standard=PHPCompatibilityWP --extensions=php --ignore=vendor/*,node_modules/*,build/* --runtime-set testVersion 7.4- .",
+        "stan": "phpstan analyse --memory-limit=1G",
+        "test": "phpunit",
+        "test-integration": "php8.3 vendor/bin/phpunit --configuration phpunit-integration.xml.dist"
+    }
+}

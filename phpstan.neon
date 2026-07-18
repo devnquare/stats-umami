@@ -1,0 +1,18 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    level: 5
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    paths:
+        - stats-umami.php
+        - uninstall.php
+        - src
+    excludePaths:
+        - vendor/*
+        - node_modules/*
+        - build/*
+    scanFiles:
+        - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+        - phpstan-stubs-cf7.php

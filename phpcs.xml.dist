@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<ruleset name="Stats Umami">
+	<description>Coding standard for the Stats Umami plugin.</description>
+
+	<file>.</file>
+
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>/build/*</exclude-pattern>
+	<exclude-pattern>/languages/*</exclude-pattern>
+
+	<!-- WP-core-style test fixtures, not production code: these define
+	     unprefixed WP core constants (DB_NAME, ABSPATH, ...) and a
+	     $table_prefix global by contract with wp-phpunit/wp-test-utils,
+	     which WordPress.NamingConventions.PrefixAllGlobals/
+	     GlobalVariablesOverride correctly flag on real plugin code but not
+	     here. -->
+	<exclude-pattern>/tests/wp-tests-config.php</exclude-pattern>
+	<exclude-pattern>/tests/wp-tests-config-sample.php</exclude-pattern>
+	<exclude-pattern>/tests/Integration/bootstrap.php</exclude-pattern>
+
+	<!-- PHPStan-only stub, never loaded at runtime (see phpstan.neon
+	     scanFiles + the file's own docblock): intentionally declares the
+	     THIRD-PARTY class name WPCF7_ContactForm unprefixed, which
+	     PrefixAllGlobals correctly flags on real plugin code but not here. -->
+	<exclude-pattern>/phpstan-stubs-cf7.php</exclude-pattern>
+
+	<!-- Test-only global-namespace class stub (see the file's own
+	     docblock): intentionally declares the THIRD-PARTY class name
+	     WPForms unprefixed, so WPFormsIntegrationTest can drive
+	     Integrations\Manager's class_exists('WPForms') predicate to true. -->
+	<exclude-pattern>/tests/Integration/wpforms-class-stub.php</exclude-pattern>
+
+	<!-- Test-only global-namespace class stubs (see each file's own
+	     docblock): intentionally declare the THIRD-PARTY class names
+	     WooCommerce/WC_Order unprefixed, so WooCommerceIntegrationTest can
+	     drive Integrations\Manager's class_exists('WooCommerce') predicate
+	     and Integrations\WooCommerce's `instanceof \WC_Order` guard. -->
+	<exclude-pattern>/tests/Integration/woocommerce-class-stub.php</exclude-pattern>
+	<exclude-pattern>/tests/Integration/wc-order-stub.php</exclude-pattern>
+
+	<!-- Test-only stub (see the file's own docblock): intentionally declares
+	     the THIRD-PARTY namespace/class Automattic\WooCommerce\Utilities\OrderUtil
+	     unprefixed, so UninstallHposMetaTest can report
+	     HPOS as inactive while the wc_orders_meta table still exists. -->
+	<exclude-pattern>/tests/Integration/order-util-hpos-inactive-stub.php</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<config name="minimum_supported_wp_version" value="6.0"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<!-- WordPress-Extra pulls in WordPress-Core; the umbrella "WordPress" ref
+	     is deliberately NOT used because it bundles WordPress-Docs
+	     unscoped, which would make the tests/ exclude-pattern below a
+	     no-op (its own docs sniffs would still fire via that bundle). -->
+	<rule ref="WordPress-Extra">
+		<!-- File-name rules assume a single-class-per-file WP.org core/plugin
+		     convention; this codebase uses PSR-4 (StatsUmami\Settings\Options
+		     lives in src/Settings/Options.php), which is the modern,
+		     WPCS-acknowledged alternative for namespaced plugins. -->
+		<exclude name="WordPress.Files.FileName"/>
+	</rule>
+
+	<!-- Docblock-on-every-method strictness applies to production code only;
+	     PHPUnit test methods are self-documenting via descriptive names. -->
+	<rule ref="WordPress-Docs">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="stats-umami"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="stats_umami"/>
+				<element value="STATS_UMAMI"/>
+				<element value="StatsUmami"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- wpcf7_edit_contact_form is Contact Form 7's own meta capability
+	     (includes/capabilities.php), used by Integrations\ContactForm7's
+	     save_meta() guard - a real, legitimately-used
+	     third-party capability, not a typo. -->
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="wpcf7_edit_contact_form"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

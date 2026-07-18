@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
+    bootstrap="tests/Integration/bootstrap.php"
+    colors="true"
+>
+    <testsuites>
+        <testsuite name="integration">
+            <directory>tests/Integration</directory>
+            <!-- ManagerGatingTest stubs the CF7/WPForms/WooCommerce dependency
+                 predicates PRESENT for the whole rest of this PHP process
+                 (PHP can't undefine a constant/class once declared). It is
+                 excluded here and run as its own later testsuite below so it
+                 always executes AFTER ContactForm7IntegrationTest /
+                 WPFormsIntegrationTest / WooCommerceIntegrationTest, whose own
+                 gating tests each need those dependencies genuinely absent at
+                 one point mid-test. -->
+            <exclude>tests/Integration/ManagerGatingTest.php</exclude>
+        </testsuite>
+        <testsuite name="integration-gating">
+            <file>tests/Integration/ManagerGatingTest.php</file>
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
+</phpunit>

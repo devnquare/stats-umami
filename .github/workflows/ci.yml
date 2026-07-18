@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Lint (PHPCS)
+        run: composer lint
+
+      - name: PHP compatibility (7.4 floor)
+        run: composer compat
+
+      - name: Static analysis (PHPStan)
+        run: composer stan
+
+      - name: PHP unit tests
+        run: composer test
+
+      # Integration tests need a provisioned WordPress test DB/suite and are
+      # intentionally excluded here; may be phased in once that's set up in CI.
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: JS unit tests
+        run: npm run test-unit-js
